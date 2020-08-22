@@ -51,7 +51,7 @@ export default {
     document.getElementById("autocomplete"),
     {
       bounds: new google.maps.LatLngBounds(
-        new google.maps.LatLng(45.4215296, -75.6971931)
+        new google.maps.LatLng(21.028511, 105.804817)
       )
     }
   );
@@ -68,7 +68,7 @@ this.spinner = true;
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             this.getAddressFrom(position.coords.latitude, position.coords.longitude)
-
+            this.getNearBySearch(position.coords.latitude, position.coords.longitude)
           this.showUserLocationOnTheMap(
             position.coords.latitude,
             position.coords.longitude)
@@ -85,6 +85,8 @@ this.spinner = true;
       }
     },
     getAddressFrom(lat, long) {
+      console.log('lat',lat)
+      console.log('long',long)
       axios.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat +
         ","
         + long
@@ -105,6 +107,21 @@ this.spinner = true;
         console.log(error.message);
       })
     },
+    getNearBySearch(lat,long) {
+      axios.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
+        lat +
+        "," +
+        long +
+        "&radius=500&key=AIzaSyBusVGWDRTeG2SxnREmNe1WkgfYhEQu7MI"
+     )
+        .then(response => {
+         console.log('nearby=>',response)
+        })
+        .catch(error=>{
+          console.log('nearbyEror=>',error.message);
+        })
+    },
+
     showUserLocationOnTheMap(latitude, longitude)
     {
       //Create A Map Object
