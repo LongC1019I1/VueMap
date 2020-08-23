@@ -112,7 +112,9 @@ this.spinner = true;
         lat +
         "," +
         long +
-        "&radius=500&key=AIzaSyBusVGWDRTeG2SxnREmNe1WkgfYhEQu7MI"
+        "&radius=50" +
+        "&key=AIzaSyBusVGWDRTeG2SxnREmNe1WkgfYhEQu7MI"
+
      )
         .then(response => {
          console.log('nearby=>',response)
